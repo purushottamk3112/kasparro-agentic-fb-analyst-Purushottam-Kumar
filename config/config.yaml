@@ -1,0 +1,45 @@
+python: "3.10"
+random_seed: 42
+confidence_min: 0.6
+use_sample_data: false
+
+# Data paths
+data_csv: "synthetic_fb_ads_undergarments.csv"
+sample_data_csv: "data/sample_fb_ads.csv"
+
+# Thresholds for analysis
+thresholds:
+  roas_drop_threshold: 0.15  # 15% drop
+  ctr_low_threshold: 0.015   # 1.5% CTR
+  spend_significance: 100     # Minimum spend for analysis
+  fatigue_days: 14           # Days to detect audience fatigue
+  
+# Agent configuration
+agents:
+  planner:
+    model: "gpt-4"
+    temperature: 0.3
+  data_agent:
+    model: "gpt-4"
+    temperature: 0.1
+  insight_agent:
+    model: "gpt-4"
+    temperature: 0.5
+  evaluator:
+    model: "gpt-4"
+    temperature: 0.2
+  creative_generator:
+    model: "gpt-4"
+    temperature: 0.8
+    max_suggestions: 5
+
+# Logging
+logging:
+  level: "INFO"
+  format: "json"
+  output_dir: "logs"
+
+# Output
+output:
+  reports_dir: "reports"
+  save_intermediate: true
