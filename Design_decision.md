@@ -1,4 +1,4 @@
-# Design Decisions & Tradeoffs
+# Design Decisions & TRadeoffs
 
 ## Overview
 This document explains key architectural decisions made in building the Kasparro Agentic FB Analyst.
