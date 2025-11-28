@@ -231,6 +231,6 @@ def _generate_with_llm(self, top_performers, issues):
 
 ---
 
-**Author:** [Your Name]  
+**Author:** [Purushottam Kumar]  
 **Date:** 2025-11-28  
 **Version:** 1.0
