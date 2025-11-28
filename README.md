@@ -252,8 +252,71 @@ User Query
     ↓
 Reports Generated
 ```
+## 🏗️ System Architecture
 
-See [agent_graph.md](agent_graph.md) for detailed architecture documentation.
+### Agent Flow Diagram
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         USER QUERY                               │
+│                  "Analyze ROAS drop in last 7 days"             │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │  ORCHESTRATOR   │
+                    │  Coordinates    │
+                    │  workflow       │
+                    └────────┬────────┘
+                             │
+        ┌────────────────────┼────────────────────┐
+        │                    │                    │
+        ▼                    ▼                    ▼
+┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│   PLANNER    │───▶│  DATA AGENT  │───▶│   INSIGHT    │
+│              │    │              │    │    AGENT     │
+│ Decomposes   │    │ Loads &      │    │              │
+│ query into   │    │ analyzes     │    │ Generates    │
+│ tasks        │    │ CSV data     │    │ hypotheses   │
+└──────────────┘    └──────────────┘    └──────┬───────┘
+                                               │
+                                               ▼
+                                        ┌──────────────┐
+                                        │  EVALUATOR   │
+                                        │              │
+                                        │ Validates    │
+                                        │ with stats   │
+                                        └──────┬───────┘
+                                               │
+                                               ▼
+                                        ┌──────────────┐
+                                        │  CREATIVE    │
+                                        │  GENERATOR   │
+                                        │              │
+                                        │ Recommends   │
+                                        │ new ads      │
+                                        └──────┬───────┘
+                                               │
+                                               ▼
+                    ┌──────────────────────────────────────┐
+                    │          OUTPUT FILES                │
+                    │  • reports/report.md                 │
+                    │  • reports/insights.json             │
+                    │  • reports/creatives.json            │
+                    │  • logs/*.log                        │
+                    └──────────────────────────────────────┘
+```
+
+### Data Flow
+
+1. **Planner** receives query and creates execution plan
+2. **Data Agent** loads CSV, computes statistics, identifies patterns
+3. **Insight Agent** generates 3-7 hypotheses explaining patterns
+4. **Evaluator** validates each hypothesis with statistical tests (t-tests, ANOVA, Cohen's d)
+5. **Creative Generator** proposes new creative concepts based on validated insights
+6. **Orchestrator** compiles all results into human-readable reports
+
+For detailed architecture documentation, see [agent_graph.md](agent_graph.md).
+
 
 ### Key Design Principles
 
