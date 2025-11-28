@@ -235,23 +235,7 @@ python tests/test_evaluator.py
 
 ## 🏗️ Architecture
 
-### Agent Flow Diagram
 
-```
-User Query
-    ↓
-[Planner Agent] → Creates execution plan
-    ↓
-[Data Agent] → Loads & analyzes data
-    ↓
-[Insight Agent] → Generates hypotheses
-    ↓
-[Evaluator Agent] → Validates with statistics
-    ↓
-[Creative Generator] → Proposes new creatives
-    ↓
-Reports Generated
-```
 ## 🏗️ System Architecture
 
 ### Agent Flow Diagram
